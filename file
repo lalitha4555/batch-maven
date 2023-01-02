@@ -3,7 +3,7 @@ pipeline
 	agent any
 	stages
 	{
-		stage('Continuous Download_Master') 
+		stage('Continuous Downloa:wqd') 
 		{
 			steps
 			{
@@ -22,7 +22,7 @@ pipeline
 			}
 			
 		}
-		stage('Continuous Build_Master') 
+		stage('Continuous Build') 
 		{
 			steps
 			{
@@ -40,7 +40,7 @@ pipeline
 				}
 			}
 		}
-		stage('continuous deploy_Master') 
+		stage('continuous deploy') 
 		{
 			steps
 			{
@@ -58,7 +58,7 @@ pipeline
 				}
 			}
 		}
-		stage('continuous testing_Master') 
+		stage('continuous testing') 
 		{
 			steps
 			{
@@ -77,7 +77,7 @@ pipeline
 				}
 			}
 		}
-        stage('continuous production_Master') 
+        stage('continuous production') 
 		{
 			steps
 			{
