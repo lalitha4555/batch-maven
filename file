@@ -3,7 +3,7 @@ pipeline
 	agent any
 	stages
 	{
-		stage('Continuous Downloa:wqd') 
+		stage('Continuous Download_Master') 
 		{
 			steps
 			{
@@ -22,7 +22,7 @@ pipeline
 			}
 			
 		}
-		stage('Continuous Build') 
+		stage('Continuous Build_Master') 
 		{
 			steps
 			{
@@ -40,7 +40,7 @@ pipeline
 				}
 			}
 		}
-		stage('continuous deploy') 
+		stage('continuous deploy_Master') 
 		{
 			steps
 			{
@@ -48,17 +48,17 @@ pipeline
 				{
 					try
 					{
-						sh 'scp /home/ubuntu/.jenkins/workspace/des-pipeline/webapp/target/webapp.war ubuntu@172.31.92.167:/var/lib/tomcat8/webapps/testapp'
+						sh 'scp /home/ubuntu/.jenkins/workspace/multi-pipeline/webapp/target/webapp.war ubuntu@172.31.92.186:/var/lib/tomcat8/webapps/testapp'
 					}
 					catch(Exception e3)
 					{
 						mail bcc: '', body: 'deploy failure', cc: 'test@gmail.com', from: '', replyTo: '', subject: 'continuous deploy', to: 'developer@gmail.com'
-						exit(1)
+						exit(3)
 					}
 				}
 			}
 		}
-		stage('continuous testing') 
+		stage('continuous testing_Master') 
 		{
 			steps
 			{
@@ -67,7 +67,7 @@ pipeline
 					try
 					{
 						git 'https://github.com/ArkLearnersEdge/FunctionalTesting.git'
-						 sh 'java -jar /home/ubuntu/.jenkins/workspace/des-pipeline/testing.jar'
+						 sh 'java -jar /home/ubuntu/.jenkins/workspace/multi-pipeline/testing.jar'
 					}
 					catch(Exception e4)
 					{
@@ -77,7 +77,7 @@ pipeline
 				}
 			}
 		}
-        stage('continuous production') 
+        stage('continuous production_Master') 
 		{
 			steps
 			{
@@ -85,11 +85,11 @@ pipeline
 				{
 					try
 					{
-						sh 'scp /home/ubuntu/.jenkins/workspace/des-pipeline/webapp/target/webapp.war ubuntu@172.31.86.7:/var/lib/tomcat8/webapps/prodapp'
+						sh 'scp /home/ubuntu/.jenkins/workspace/multi-pipeline/webapp/target/webapp.war ubuntu@172.31.85.85:/var/lib/tomcat8/webapps/prodapp'
 					}
 					catch(Exception e5)
 					{
-				        mail bcc: '', body: 'production failure', cc: 'developer@gmail.com', from: '', replyTo: '', subject: 'continuous production', to: 'production@gmail.com'
+						mail bcc: '', body: 'test failure', cc: 'developer@gmail.com', from: '', replyTo: '', subject: 'continuous testing', to: 'test@gmail.com'
 						exit(5)
 					}
 				}
