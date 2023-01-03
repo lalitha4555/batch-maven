@@ -3,7 +3,7 @@ pipeline
 	agent any
 	stages
 	{
-		stage('Continuous Download_Master') 
+		stage('Continuous Download_loan') 
 		{
 			steps
 			{
@@ -22,7 +22,7 @@ pipeline
 			}
 			
 		}
-		stage('Continuous Build_Master') 
+		stage('Continuous Build_loan') 
 		{
 			steps
 			{
@@ -40,60 +40,5 @@ pipeline
 				}
 			}
 		}
-		stage('continuous deploy_Master') 
-		{
-			steps
-			{
-				script
-				{
-					try
-					{
-						sh 'scp /home/ubuntu/.jenkins/workspace/multi-pipeline/webapp/target/webapp.war ubuntu@172.31.92.186:/var/lib/tomcat8/webapps/testapp'
-					}
-					catch(Exception e3)
-					{
-						mail bcc: '', body: 'deploy failure', cc: 'test@gmail.com', from: '', replyTo: '', subject: 'continuous deploy', to: 'developer@gmail.com'
-						exit(3)
-					}
-				}
-			}
-		}
-		stage('continuous testing_Master') 
-		{
-			steps
-			{
-				script
-				{
-					try
-					{
-						git 'https://github.com/ArkLearnersEdge/FunctionalTesting.git'
-						 sh 'java -jar /home/ubuntu/.jenkins/workspace/multi-pipeline/testing.jar'
-					}
-					catch(Exception e4)
-					{
-						mail bcc: '', body: 'test failure', cc: 'developer@gmail.com', from: '', replyTo: '', subject: 'continuous testing', to: 'test@gmail.com'
-						exit(4)
-					}
-				}
-			}
-		}
-        stage('continuous production_Master') 
-		{
-			steps
-			{
-				script
-				{
-					try
-					{
-						sh 'scp /home/ubuntu/.jenkins/workspace/multi-pipeline/webapp/target/webapp.war ubuntu@172.31.85.85:/var/lib/tomcat8/webapps/prodapp'
-					}
-					catch(Exception e5)
-					{
-						mail bcc: '', body: 'test failure', cc: 'developer@gmail.com', from: '', replyTo: '', subject: 'continuous testing', to: 'test@gmail.com'
-						exit(5)
-					}
-				}
-			}
-		}
-	}
+        }
 }
