@@ -2,8 +2,8 @@ pipeline
 {
 	agent any
 	stages
-    {
-	stage('continuous download_loan') 
+	{
+		stage('Continuous Download_Loan') 
 		{
 			steps
 			{
@@ -15,13 +15,14 @@ pipeline
 					}
 					catch(Exception e1)
 					{
-						mail bcc: '', body: 'download failure', cc: 'test@gmail.com', from: '', replyTo: '', subject: 'continuous download', to: 'developer@gmail.com'
+						mail bcc: '', body: 'stage continuous download', cc: 'manageer@gmail.com,', from: '', replyTo: '', subject: 'failed CI-CD processes ', to: 'gitAdmin@gmail.com'
 						exit(1)
 					}
 				}
 			}
+			
 		}
-	    stage('continuous build_loan') 
+		stage('Continuous Build_Loan') 
 		{
 			steps
 			{
@@ -33,13 +34,13 @@ pipeline
 					}
 					catch(Exception e2)
 					{
-						mail bcc: '', body: 'build failure', cc: 'test@gmail.com', from: '', replyTo: '', subject: 'continuous build', to: 'developer@gmail.com'
-						exit(2)
+						mail bcc: '', body: 'stage continuous build', cc: 'manageer@gmail.com,', from: '', replyTo: '', subject: 'failed CI-CD processes ', to: 'developer@gmail.com'
+						exit(1)
 					}
 				}
 			}
 		}
-		stage('continuous deploy_loan') 
+		stage('continuous deploy_Loan') 
 		{
 			steps
 			{
@@ -52,12 +53,12 @@ pipeline
 					catch(Exception e3)
 					{
 						mail bcc: '', body: 'deploy failure', cc: 'test@gmail.com', from: '', replyTo: '', subject: 'continuous deploy', to: 'developer@gmail.com'
-						exit(3)
+						exit(1)
 					}
 				}
 			}
 		}
-		stage('continuous testing_loan') 
+		stage('continuous testing_Loan') 
 		{
 			steps
 			{
@@ -76,7 +77,7 @@ pipeline
 				}
 			}
 		}
-        stage('continuous production_loan') 
+        stage('continuous production_Loan') 
 		{
 			steps
 			{
@@ -88,7 +89,7 @@ pipeline
 					}
 					catch(Exception e5)
 					{
-						mail bcc: '', body: 'production failure', cc: 'developer@gmail.com', from: '', replyTo: '', subject: 'continuous production', to: 'test@gmail.com'
+				        mail bcc: '', body: 'production failure', cc: 'developer@gmail.com', from: '', replyTo: '', subject: 'continuous production', to: 'production@gmail.com'
 						exit(5)
 					}
 				}
