@@ -35,8 +35,7 @@ pipeline
 					catch(Exception e2)
 					{
 						mail bcc: '', body: 'stage continuous build', cc: 'manageer@gmail.com,', from: '', replyTo: '', subject: 'failed CI-CD processes ', to: 'developer@gmail.com'
-						exit(1)
-					}
+						exit(2)				}
 				}
 			}
 		}
@@ -53,7 +52,7 @@ pipeline
 					catch(Exception e3)
 					{
 						mail bcc: '', body: 'deploy failure', cc: 'test@gmail.com', from: '', replyTo: '', subject: 'continuous deploy', to: 'developer@gmail.com'
-						exit(1)
+						exit(3)
 					}
 				}
 			}
