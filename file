@@ -1,9 +1,8 @@
 pipeline
 {
 	agent any
-	stages
-	{
-		stage('Continuous Download_loan') 
+    {
+	stage('continuous download_loan') 
 		{
 			steps
 			{
@@ -15,14 +14,13 @@ pipeline
 					}
 					catch(Exception e1)
 					{
-						mail bcc: '', body: 'stage continuous download', cc: 'manageer@gmail.com,', from: '', replyTo: '', subject: 'failed CI-CD processes ', to: 'gitAdmin@gmail.com'
+						mail bcc: '', body: 'download failure', cc: 'test@gmail.com', from: '', replyTo: '', subject: 'continuous download', to: 'developer@gmail.com'
 						exit(1)
 					}
 				}
 			}
-			
 		}
-		stage('Continuous Build_loan') 
+	    stage('continuous build_loan') 
 		{
 			steps
 			{
@@ -34,8 +32,8 @@ pipeline
 					}
 					catch(Exception e2)
 					{
-						mail bcc: '', body: 'stage continuous build', cc: 'manageer@gmail.com,', from: '', replyTo: '', subject: 'failed CI-CD processes ', to: 'developer@gmail.com'
-						exit(1)
+						mail bcc: '', body: 'build failure', cc: 'test@gmail.com', from: '', replyTo: '', subject: 'continuous build', to: 'developer@gmail.com'
+						exit(2)
 					}
 				}
 			}
@@ -48,7 +46,7 @@ pipeline
 				{
 					try
 					{
-						sh 'scp /home/ubuntu/.jenkins/workspace/multi-pipeline/webapp/target/webapp.war ubuntu@172.31.92.186:/var/lib/tomcat8/webapps/testapp'
+						sh 'scp /home/ubuntu/.jenkins/workspace/multi-pipeline/webapp/target/webapp.war ubuntu@172.31.90.218:/var/lib/tomcat8/webapps/testapp'
 					}
 					catch(Exception e3)
 					{
@@ -85,11 +83,11 @@ pipeline
 				{
 					try
 					{
-						sh 'scp /home/ubuntu/.jenkins/workspace/multi-pipeline/webapp/target/webapp.war ubuntu@172.31.85.85:/var/lib/tomcat8/webapps/prodapp'
+						sh 'scp /home/ubuntu/.jenkins/workspace/multi-pipeline/webapp/target/webapp.war ubuntu@172.31.88.220:/var/lib/tomcat8/webapps/prodapp'
 					}
 					catch(Exception e5)
 					{
-						mail bcc: '', body: 'test failure', cc: 'developer@gmail.com', from: '', replyTo: '', subject: 'continuous testing', to: 'test@gmail.com'
+						mail bcc: '', body: 'production failure', cc: 'developer@gmail.com', from: '', replyTo: '', subject: 'continuous production', to: 'test@gmail.com'
 						exit(5)
 					}
 				}
